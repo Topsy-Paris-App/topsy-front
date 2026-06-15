@@ -1,80 +1,98 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { useCart, subtotalCents } from "@/lib/cart/store";
+import {
+  useCart,
+  subtotalCents,
+  DELIVERY_MIN_CENTS,
+  DELIVERY_FEE_CENTS,
+} from "@/lib/cart/store";
 import { formatCents } from "@/lib/price";
+import Photo from "@/components/topsy/Photo";
 
 export default function CartPage() {
-  const t = useTranslations("cart");
-  const { items, updateQty, remove } = useCart();
+  const items = useCart((s) => s.items);
+  const updateQty = useCart((s) => s.updateQty);
+  const remove = useCart((s) => s.remove);
   const subtotal = subtotalCents(items);
+  const under = subtotal < DELIVERY_MIN_CENTS;
+
+  if (items.length === 0) {
+    return (
+      <div className="section narrow empty-state">
+        <h1 className="page-title">votre panier</h1>
+        <p>Votre panier est vide pour le moment.</p>
+        <Link href="/menu" className="btn btn--primary">
+          voir la carte
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <main className="min-h-screen bg-background pt-24 pb-20">
-      <section className="max-w-2xl mx-auto px-6 lg:px-8">
-        <h1 className="text-4xl lg:text-6xl font-headline text-on-surface mb-12">
-          {t("title")}
-        </h1>
-
-        {items.length === 0 ? (
-          <p className="text-on-surface-variant">{t("empty")}</p>
-        ) : (
-          <>
-            <ul className="space-y-4 mb-8">
-              {items.map((item) => (
-                <li
-                  key={item.itemId}
-                  className="flex items-center justify-between gap-4 bg-surface-container-low p-5 rounded-xl"
-                >
-                  <div>
-                    <p className="text-on-surface font-label font-semibold">
-                      {item.name}
-                    </p>
-                    <p className="text-on-surface-variant text-sm">
-                      {formatCents(item.unitPriceCents)}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <input
-                      type="number"
-                      min={0}
-                      value={item.qty}
-                      onChange={(e) =>
-                        updateQty(item.itemId, Number(e.target.value))
-                      }
-                      className="w-16 bg-surface-container-high text-on-surface rounded-lg p-2 text-center outline-none"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => remove(item.itemId)}
-                      className="text-error text-sm"
-                    >
-                      {t("remove")}
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center justify-between mb-8">
-              <span className="text-on-surface-variant uppercase tracking-widest text-xs font-bold">
-                {t("subtotal")}
-              </span>
-              <span className="text-on-surface text-xl font-label">
-                {formatCents(subtotal)}
-              </span>
-            </div>
-
-            <Link
-              href="/checkout"
-              className="inline-flex items-center justify-center gold-gradient text-on-primary text-xs font-label font-semibold tracking-widest uppercase px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
-            >
-              {t("checkout")}
-            </Link>
-          </>
-        )}
-      </section>
-    </main>
+    <div className="section narrow">
+      <h1 className="page-title">votre panier</h1>
+      <div className="cartpage">
+        <ul className="cartpage__items">
+          {items.map((it) => (
+            <li className="cline" key={it.itemId}>
+              <div className="cline__thumb" style={{ position: "relative" }}>
+                <Photo imageUrl={it.imageUrl} alt="" radius={12} />
+              </div>
+              <div className="cline__info">
+                <span className="cline__name">{it.name}</span>
+                {it.options && it.options.length > 0 && (
+                  <span className="cline__opt">{it.options.join(" · ")}</span>
+                )}
+                <button className="citem__remove" onClick={() => remove(it.itemId)}>
+                  retirer
+                </button>
+              </div>
+              <div className="qty">
+                <button onClick={() => updateQty(it.itemId, it.qty - 1)}>–</button>
+                <span>{it.qty}</span>
+                <button onClick={() => updateQty(it.itemId, it.qty + 1)}>+</button>
+              </div>
+              <span className="cline__price">{formatCents(it.unitPriceCents * it.qty)}</span>
+            </li>
+          ))}
+        </ul>
+        <aside className="cartpage__summary">
+          <h3>récapitulatif</h3>
+          <div className="sumline">
+            <span>Sous-total</span>
+            <span>{formatCents(subtotal)}</span>
+          </div>
+          <div className="sumline sumline--muted">
+            <span>Frais de livraison</span>
+            <span>dès {formatCents(DELIVERY_FEE_CENTS)}</span>
+          </div>
+          <div className="sumline sumline--total">
+            <span>Total estimé</span>
+            <strong>{formatCents(subtotal)}</strong>
+          </div>
+          {under ? (
+            <p className="warn">
+              Minimum de commande {formatCents(DELIVERY_MIN_CENTS)}. Ajoutez{" "}
+              {formatCents(DELIVERY_MIN_CENTS - subtotal)} pour continuer.
+            </p>
+          ) : (
+            <p className="muted-note">
+              Frais de livraison exacts calculés au paiement selon la distance.
+            </p>
+          )}
+          <Link
+            href="/checkout"
+            className={`btn btn--primary block${under ? " is-disabled" : ""}`}
+            onClick={(e) => under && e.preventDefault()}
+          >
+            commander
+          </Link>
+          <Link href="/menu" className="link-back">
+            ← continuer mes achats
+          </Link>
+        </aside>
+      </div>
+    </div>
   );
 }

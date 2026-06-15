@@ -2,12 +2,11 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { getOrder, type Order } from "@/lib/api/orders";
 import { formatCents } from "@/lib/price";
 
 function SuccessContent() {
-  const t = useTranslations("success");
   const orderId = useSearchParams().get("orderId");
   const [order, setOrder] = useState<Order | null>(null);
 
@@ -31,32 +30,50 @@ function SuccessContent() {
   }, [orderId]);
 
   return (
-    <section className="max-w-xl mx-auto px-6 lg:px-8 text-center">
-      <h1 className="text-4xl lg:text-6xl font-headline text-on-surface mb-6">
-        {t("title")}
-      </h1>
+    <div className="section narrow confirm">
+      <div className="confirm__badge">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 13l4 4 10-12" />
+        </svg>
+      </div>
+      <h1 className="page-title">merci, c&apos;est commandé&nbsp;!</h1>
       {order ? (
         <>
-          <p className="text-on-surface-variant mb-2">
-            {t("status")}: {order.status}
+          <p className="confirm__lead">
+            Votre commande est <b>{order.status}</b>. On la cuisine le jour-même.
           </p>
-          <p className="text-on-surface text-xl font-label">
-            {formatCents(order.subtotalCents)}
-          </p>
+          <div className="confirm__card">
+            <ul className="recap">
+              {order.items.map((it) => (
+                <li className="recap__line" key={it.itemId}>
+                  <span className="recap__q">{it.qty}×</span>
+                  <span className="recap__n">{it.name}</span>
+                  <span className="recap__p">{formatCents(it.unitPriceCents * it.qty)}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="sumline sumline--total">
+              <span>Total</span>
+              <strong>{formatCents(order.subtotalCents)}</strong>
+            </div>
+          </div>
         </>
       ) : (
-        <p className="text-on-surface-variant">{t("loading")}</p>
+        <p className="confirm__lead">Chargement de votre commande…</p>
       )}
-    </section>
+      <div className="confirm__cta">
+        <Link href="/menu" className="btn btn--outline">
+          retour à la carte
+        </Link>
+      </div>
+    </div>
   );
 }
 
 export default function CheckoutSuccessPage() {
   return (
-    <main className="min-h-screen bg-background pt-24 pb-20">
-      <Suspense>
-        <SuccessContent />
-      </Suspense>
-    </main>
+    <Suspense>
+      <SuccessContent />
+    </Suspense>
   );
 }
