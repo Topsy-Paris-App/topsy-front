@@ -33,7 +33,7 @@ export const mentionsLegales: LegalDoc = {
     ),
     h("Éditeur du site"),
     p(
-      "Le site topsy-paris.fr est édité par TOPSY PARIS, SAS (Société par Actions Simplifiée) au capital de {{CAPITAL}} euros, dont le siège social est situé 66 avenue Henri Barbusse, 95470 Fosses.",
+      "Le site topsy-paris.fr est édité par TOPSY PARIS, SAS (Société par Actions Simplifiée) au capital de 500 euros, dont le siège social est situé 66 avenue Henri Barbusse, 95470 Fosses.",
     ),
     p(
       "SIRET : 91155023400015 — RCS Pontoise 911 550 234 — N° TVA intracommunautaire : FR39911550234.",
