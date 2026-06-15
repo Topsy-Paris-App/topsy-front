@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { useCart } from "@/lib/cart/store";
+import { useCart, lineKey } from "@/lib/cart/store";
 import { formatCents } from "@/lib/price";
 import { localize, type MenuItem } from "@/lib/api/menu";
 import Badge from "./Badge";
 import Photo from "./Photo";
+import Configurator from "./Configurator";
 
 function badgesOf(item: MenuItem): string[] {
   const out: string[] = [];
@@ -19,9 +20,11 @@ function badgesOf(item: MenuItem): string[] {
 export default function DishDetail({ item, locale }: { item: MenuItem; locale: string }) {
   const add = useCart((s) => s.add);
   const [qty, setQty] = useState(1);
+  const [configOpen, setConfigOpen] = useState(false);
   const name = localize(item, "name", locale);
   const description = localize(item, "description", locale);
   const badges = badgesOf(item);
+  const hasOptions = item.option_groups.length > 0;
 
   return (
     <div className="detail">
@@ -64,14 +67,27 @@ export default function DishDetail({ item, locale }: { item: MenuItem; locale: s
               className="btn btn--primary detail__add"
               disabled={!item.is_available}
               onClick={() =>
-                add({ itemId: item.id, name, unitPriceCents: item.price_cents, qty, imageUrl: item.image_url })
+                hasOptions
+                  ? setConfigOpen(true)
+                  : add({
+                      key: lineKey(item.id, []),
+                      itemId: item.id,
+                      slug: item.slug,
+                      name,
+                      basePriceCents: item.price_cents,
+                      options: [],
+                      unitPriceCents: item.price_cents,
+                      qty,
+                      imageUrl: item.image_url,
+                    })
               }
             >
-              ajouter · {formatCents(item.price_cents * qty)}
+              {hasOptions ? "composer" : `ajouter · ${formatCents(item.price_cents * qty)}`}
             </button>
           </div>
         </div>
       </div>
+      {configOpen && <Configurator item={item} locale={locale} onClose={() => setConfigOpen(false)} />}
     </div>
   );
 }

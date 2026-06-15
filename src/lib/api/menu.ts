@@ -4,6 +4,25 @@ import { apiFetch } from "./client";
 // Types — match the real API shape (GET /menu, GET /menu/:slug).
 // ---------------------------------------------------------------------------
 
+export interface Option {
+  id: string;
+  name_fr: string;
+  name_en: string | null;
+  price_cents: number;
+  position: number;
+  available: boolean;
+}
+
+export interface OptionGroup {
+  id: string;
+  name_fr: string;
+  name_en: string | null;
+  min_select: number;
+  max_select: number;
+  position: number;
+  options: Option[];
+}
+
 export interface MenuItem {
   id: string;
   category_id: string;
@@ -20,6 +39,7 @@ export interface MenuItem {
   position: number;
   allergens: string[];
   spice_level: number | null;
+  option_groups: OptionGroup[];
 }
 
 export interface Category {
@@ -38,7 +58,7 @@ export interface Category {
 
 /** Resolve a localized field pair (`name`, `description`, …), falling back to FR. */
 export function localize(
-  x: MenuItem | Category,
+  x: MenuItem | Category | OptionGroup | Option,
   field: "name" | "description",
   locale: string,
 ): string {

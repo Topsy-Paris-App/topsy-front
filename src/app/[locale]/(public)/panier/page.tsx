@@ -35,23 +35,23 @@ export default function CartPage() {
       <div className="cartpage">
         <ul className="cartpage__items">
           {items.map((it) => (
-            <li className="cline" key={it.itemId}>
+            <li className="cline" key={it.key}>
               <div className="cline__thumb" style={{ position: "relative" }}>
                 <Photo imageUrl={it.imageUrl} alt="" radius={12} />
               </div>
               <div className="cline__info">
                 <span className="cline__name">{it.name}</span>
-                {it.options && it.options.length > 0 && (
-                  <span className="cline__opt">{it.options.join(" · ")}</span>
+                {it.options.length > 0 && (
+                  <span className="cline__opt">{it.options.map((o) => o.name).join(" · ")}</span>
                 )}
-                <button className="citem__remove" onClick={() => remove(it.itemId)}>
+                <button className="citem__remove" onClick={() => remove(it.key)}>
                   retirer
                 </button>
               </div>
               <div className="qty">
-                <button onClick={() => updateQty(it.itemId, it.qty - 1)}>–</button>
+                <button onClick={() => updateQty(it.key, it.qty - 1)}>–</button>
                 <span>{it.qty}</span>
-                <button onClick={() => updateQty(it.itemId, it.qty + 1)}>+</button>
+                <button onClick={() => updateQty(it.key, it.qty + 1)}>+</button>
               </div>
               <span className="cline__price">{formatCents(it.unitPriceCents * it.qty)}</span>
             </li>
