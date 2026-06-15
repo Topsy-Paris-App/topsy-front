@@ -90,8 +90,8 @@ export default function RegisterPage() {
           setIsLoading(true);
           try {
             const user = await register(firstName, lastName, email, password);
-            const redirect: Record<string, string> = { user: "/dashboard/user", host: "/dashboard/host", admin: "/dashboard/admin" };
-            router.push(redirect[user.role] ?? "/");
+            const redirect: Record<string, string> = { customer: "/dashboard", admin: "/admin" };
+            router.push(redirect[user.role] ?? "/dashboard");
           } catch (err) {
             setError(err instanceof Error ? err.message : "Registration failed");
           } finally {

@@ -1,12 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import PageHero from "@/components/topsy/PageHero";
 
-const ZONES = [
-  { name: "Zone verte", radius: "≤ 20 km", fee: "20 €", min: "45 €" },
-  { name: "Zone orange", radius: "≤ 40 km", fee: "30 €", min: "60 €" },
-  { name: "Zone bleue", radius: "≤ 60 km", fee: "45 €", min: "90 €" },
-];
-
 export default function LivraisonPage() {
   return (
     <div>
@@ -41,17 +35,6 @@ export default function LivraisonPage() {
               commander en retrait
             </Link>
           </div>
-        </div>
-
-        <div className="zone-table">
-          {ZONES.map((z) => (
-            <div className="zone-row" key={z.name}>
-              <span className="zone-row__name">{z.name}</span>
-              <span className="zone-row__radius">{z.radius}</span>
-              <span className="zone-row__fee">livraison {z.fee}</span>
-              <span className="zone-row__min">minimum {z.min}</span>
-            </div>
-          ))}
         </div>
 
         <p className="center-cta">

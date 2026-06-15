@@ -26,9 +26,8 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const REDIRECT: Record<string, string> = {
-    user: "/dashboard/user",
-    host: "/dashboard/host",
-    admin: "/dashboard/admin",
+    customer: "/dashboard",
+    admin: "/admin",
   };
 
   async function handleSubmit(e: React.FormEvent) {
@@ -37,13 +36,7 @@ export default function LoginPage() {
     setIsLoading(true);
     try {
       const user = await login(email, password, rememberMe);
-      // Admins can sign in from any tab; otherwise the selected tab must match.
-      if (user.role !== "admin" && user.role !== role) {
-        const expected = user.role === "host" ? "Host" : "Guest";
-        setError(`This account is a ${expected}. Switch to the ${expected} tab to continue.`);
-        return;
-      }
-      router.push(redirectTo || (REDIRECT[user.role] ?? "/"));
+      router.push(redirectTo || (REDIRECT[user.role] ?? "/dashboard"));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {

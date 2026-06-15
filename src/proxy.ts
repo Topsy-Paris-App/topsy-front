@@ -18,11 +18,9 @@ function stripLocale(pathname: string): string {
 }
 
 // Routes that require authentication
-const AUTH_REQUIRED = ["/dashboard", "/bookings", "/profile", "/booking"];
-// Routes only for hosts or admins
-const HOST_ONLY = ["/dashboard/host"];
+const AUTH_REQUIRED = ["/dashboard", "/admin"];
 // Routes only for admins
-const ADMIN_ONLY = ["/dashboard/admin"];
+const ADMIN_ONLY = ["/admin"];
 // Routes that authenticated users should not reach
 const GUEST_ONLY = ["/auth/login", "/auth/register"];
 
@@ -37,12 +35,7 @@ export function proxy(request: NextRequest) {
   // Authenticated users → away from login/register
   if (GUEST_ONLY.some((p) => path.startsWith(p)) && isAuthed) {
     const dest = request.nextUrl.clone();
-    const dashboard =
-      role === "admin"
-        ? "/dashboard/admin"
-        : role === "host"
-          ? "/dashboard/host"
-          : "/dashboard/user";
+    const dashboard = role === "admin" ? "/admin" : "/dashboard";
     dest.pathname = `/${locale}${dashboard}`;
     dest.search = "";
     return NextResponse.redirect(dest);
@@ -58,14 +51,6 @@ export function proxy(request: NextRequest) {
 
   // Non-admin → unauthorized for admin dashboard
   if (ADMIN_ONLY.some((p) => path.startsWith(p)) && role !== "admin") {
-    const dest = request.nextUrl.clone();
-    dest.pathname = `/${locale}/unauthorized`;
-    dest.search = "";
-    return NextResponse.redirect(dest);
-  }
-
-  // Non-host/admin → unauthorized for host dashboard
-  if (HOST_ONLY.some((p) => path.startsWith(p)) && role !== "host" && role !== "admin") {
     const dest = request.nextUrl.clone();
     dest.pathname = `/${locale}/unauthorized`;
     dest.search = "";
