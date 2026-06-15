@@ -45,7 +45,9 @@ export default function DishDetail({ item, locale }: { item: MenuItem; locale: s
           )}
           <h1 className="detail__name">{name}</h1>
           <p className="detail__desc">{description}</p>
-          <div className="detail__price">{formatCents(item.price_cents)}</div>
+          <div className="detail__price">
+            {item.price_cents === 0 && hasOptions ? "à composer" : formatCents(item.price_cents)}
+          </div>
 
           {item.allergens.length > 0 && (
             <p className="detail__allerg">

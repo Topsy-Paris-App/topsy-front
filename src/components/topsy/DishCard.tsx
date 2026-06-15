@@ -73,7 +73,9 @@ export default function DishCard({ item, locale }: Props) {
         </button>
         <p className="dish__blurb">{description}</p>
         <div className="dish__foot">
-          <span className="dish__price">{formatCents(item.price_cents)}</span>
+          <span className="dish__price">
+            {item.price_cents === 0 && hasOptions ? "à composer" : formatCents(item.price_cents)}
+          </span>
           <button
             type="button"
             className={`add-btn${added ? " add-btn--on" : ""}`}
