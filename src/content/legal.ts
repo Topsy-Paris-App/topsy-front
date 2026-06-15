@@ -26,23 +26,23 @@ const p = (text: string): LegalBlock => ({ type: "p", text });
 export const mentionsLegales: LegalDoc = {
   slug: "mentions-legales",
   title: "Mentions légales",
-  updated: "{{DATE_DE_MISE_A_JOUR}}",
+  updated: "15 juin 2026",
   blocks: [
     p(
       "Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), les présentes mentions légales sont portées à la connaissance des utilisateurs du site topsy-paris.fr.",
     ),
     h("Éditeur du site"),
     p(
-      "Le site topsy-paris.fr est édité par {{RAISON_SOCIALE}}, {{FORME_JURIDIQUE}} au capital de {{CAPITAL}} euros, dont le siège social est situé {{ADRESSE_SIEGE}}.",
+      "Le site topsy-paris.fr est édité par TOPSY PARIS, {{FORME_JURIDIQUE}} au capital de {{CAPITAL}} euros, dont le siège social est situé 12 mail de l'Égalité, 93120 La Courneuve.",
     ),
     p(
-      "SIRET : {{SIRET}} — RCS {{VILLE_RCS}} {{NUMERO_RCS}} — N° TVA intracommunautaire : {{TVA_INTRACOM}}.",
+      "SIRET : 91155023400015 — RCS {{VILLE_RCS}} {{NUMERO_RCS}} — N° TVA intracommunautaire : {{TVA_INTRACOM}}.",
     ),
     p(
       "Adresse de l'établissement (retrait / click & collect) : 10-12 mail de l'Égalité, 93120 La Courneuve.",
     ),
-    p("Téléphone : {{TELEPHONE}} — E-mail : {{EMAIL_CONTACT}}."),
-    p("Directeur / Directrice de la publication : {{NOM_DIRECTEUR_PUBLICATION}}."),
+    p("Téléphone : 06 59 92 14 82 — E-mail : topsy.par@gmail.com."),
+    p("Directeur / Directrice de la publication : Blandine SIMON BENGUI."),
     h("Hébergement"),
     p(
       "Site (front) hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis — vercel.com.",
@@ -52,11 +52,11 @@ export const mentionsLegales: LegalDoc = {
     ),
     h("Propriété intellectuelle"),
     p(
-      "L'ensemble des contenus présents sur le site (textes, photographies des plats, logos, marque « Topsy »…) est protégé par le droit de la propriété intellectuelle et demeure la propriété exclusive de {{RAISON_SOCIALE}} ou de ses partenaires. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.",
+      "L'ensemble des contenus présents sur le site (textes, photographies des plats, logos, marque « Topsy »…) est protégé par le droit de la propriété intellectuelle et demeure la propriété exclusive de TOPSY PARIS ou de ses partenaires. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.",
     ),
     h("Données personnelles et cookies"),
     p(
-      "Le traitement des données personnelles est décrit dans la Politique de confidentialité. L'utilisation des cookies est décrite dans la Politique cookies. Vous pouvez exercer vos droits en écrivant à {{EMAIL_CONTACT}}.",
+      "Le traitement des données personnelles est décrit dans la Politique de confidentialité. L'utilisation des cookies est décrite dans la Politique cookies. Vous pouvez exercer vos droits en écrivant à topsy.par@gmail.com.",
     ),
     h("Médiation de la consommation"),
     p(
@@ -68,14 +68,14 @@ export const mentionsLegales: LegalDoc = {
 export const cgv: LegalDoc = {
   slug: "cgv",
   title: "Conditions générales de vente",
-  updated: "{{DATE_DE_MISE_A_JOUR}}",
+  updated: "15 juin 2026",
   blocks: [
     p(
       "⚠️ Modèle à faire valider par un juriste avant publication. Les présentes conditions générales de vente (CGV) régissent les ventes de produits alimentaires réalisées en ligne sur le site topsy-paris.fr, en livraison ou en retrait sur place (click & collect).",
     ),
     h("Article 1 — Vendeur"),
     p(
-      "Les produits sont vendus par {{RAISON_SOCIALE}}, {{FORME_JURIDIQUE}}, SIRET {{SIRET}}, dont le siège est situé {{ADRESSE_SIEGE}}, ci-après « le Vendeur ». Contact : {{EMAIL_CONTACT}} — {{TELEPHONE}}.",
+      "Les produits sont vendus par TOPSY PARIS, {{FORME_JURIDIQUE}}, SIRET 91155023400015, dont le siège est situé 12 mail de l'Égalité, 93120 La Courneuve, ci-après « le Vendeur ». Contact : topsy.par@gmail.com — 06 59 92 14 82.",
     ),
     h("Article 2 — Produits"),
     p(
@@ -95,7 +95,7 @@ export const cgv: LegalDoc = {
     ),
     h("Article 6 — Livraison et retrait"),
     p(
-      "Livraison : dans les zones desservies ({{ZONES_LIVRAISON}}), selon les frais et délais indiqués lors de la commande. Retrait (click & collect) : au 10-12 mail de l'Égalité, 93120 La Courneuve, aux horaires d'ouverture {{HORAIRES}}. Le client doit veiller au respect de la chaîne du froid après réception ou retrait.",
+      "Livraison : dans les zones desservies (Île-de-France, jusqu'à 60 km de La Courneuve (zones verte ≤20 km, orange ≤40 km, bleue ≤60 km)), selon les frais et délais indiqués lors de la commande. Retrait (click & collect) : au 10-12 mail de l'Égalité, 93120 La Courneuve, aux horaires d'ouverture Mar–Sam 11h–21h, Dim 11h–14h. Le client doit veiller au respect de la chaîne du froid après réception ou retrait.",
     ),
     h("Article 7 — Droit de rétractation"),
     p(
@@ -103,7 +103,7 @@ export const cgv: LegalDoc = {
     ),
     h("Article 8 — Réclamations et médiation"),
     p(
-      "Toute réclamation peut être adressée à {{EMAIL_CONTACT}}. En cas de litige non résolu, le consommateur peut saisir gratuitement le médiateur de la consommation : {{NOM_MEDIATEUR}} — {{ADRESSE_OU_SITE_MEDIATEUR}}. Plateforme européenne de règlement des litiges : ec.europa.eu/consumers/odr.",
+      "Toute réclamation peut être adressée à topsy.par@gmail.com. En cas de litige non résolu, le consommateur peut saisir gratuitement le médiateur de la consommation : {{NOM_MEDIATEUR}} — {{ADRESSE_OU_SITE_MEDIATEUR}}. Plateforme européenne de règlement des litiges : ec.europa.eu/consumers/odr.",
     ),
     h("Article 9 — Données personnelles"),
     p(
@@ -119,14 +119,14 @@ export const cgv: LegalDoc = {
 export const confidentialite: LegalDoc = {
   slug: "confidentialite",
   title: "Politique de confidentialité",
-  updated: "{{DATE_DE_MISE_A_JOUR}}",
+  updated: "15 juin 2026",
   blocks: [
     p(
-      "La présente politique décrit la manière dont {{RAISON_SOCIALE}} traite les données personnelles des utilisateurs du site topsy-paris.fr, conformément au Règlement Général sur la Protection des Données (RGPD, UE 2016/679) et à la loi Informatique et Libertés.",
+      "La présente politique décrit la manière dont TOPSY PARIS traite les données personnelles des utilisateurs du site topsy-paris.fr, conformément au Règlement Général sur la Protection des Données (RGPD, UE 2016/679) et à la loi Informatique et Libertés.",
     ),
     h("Responsable du traitement"),
     p(
-      "{{RAISON_SOCIALE}}, {{ADRESSE_SIEGE}}. Contact pour toute question relative aux données : {{EMAIL_CONTACT}}.",
+      "TOPSY PARIS, 12 mail de l'Égalité, 93120 La Courneuve. Contact pour toute question relative aux données : topsy.par@gmail.com.",
     ),
     h("Données collectées"),
     p(
@@ -142,7 +142,7 @@ export const confidentialite: LegalDoc = {
     ),
     h("Durées de conservation"),
     p(
-      "Données de commande : conservées le temps de la relation contractuelle puis archivées selon les obligations légales (notamment comptables, jusqu'à 10 ans). Compte client : jusqu'à sa suppression. Demandes de contact : {{DUREE_LEADS}}.",
+      "Données de commande : conservées le temps de la relation contractuelle puis archivées selon les obligations légales (notamment comptables, jusqu'à 10 ans). Compte client : jusqu'à sa suppression. Demandes de contact : 3 ans.",
     ),
     h("Transferts hors UE"),
     p(
@@ -150,7 +150,7 @@ export const confidentialite: LegalDoc = {
     ),
     h("Vos droits"),
     p(
-      "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données. Vous pouvez les exercer en écrivant à {{EMAIL_CONTACT}}. Vous pouvez également introduire une réclamation auprès de la CNIL (www.cnil.fr).",
+      "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données. Vous pouvez les exercer en écrivant à topsy.par@gmail.com. Vous pouvez également introduire une réclamation auprès de la CNIL (www.cnil.fr).",
     ),
   ],
 };
@@ -158,7 +158,7 @@ export const confidentialite: LegalDoc = {
 export const cookies: LegalDoc = {
   slug: "cookies",
   title: "Politique cookies",
-  updated: "{{DATE_DE_MISE_A_JOUR}}",
+  updated: "15 juin 2026",
   blocks: [
     p(
       "Le site topsy-paris.fr utilise des cookies et traceurs. Cette page explique lesquels et comment les gérer, conformément aux recommandations de la CNIL.",
