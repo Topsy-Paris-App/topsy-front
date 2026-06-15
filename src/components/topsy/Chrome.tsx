@@ -3,16 +3,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { useAuth } from "@/lib/auth/AuthContext";
 import { useCart, subtotalCents, count as countItems } from "@/lib/cart/store";
 import { formatCents } from "@/lib/price";
 import { UIContext } from "./ui-context";
 import Stars from "./Stars";
+import BogolanBand from "./BogolanBand";
 import CartDrawer from "./CartDrawer";
 import CreneauModal from "./CreneauModal";
 
 const NAV: [string, string][] = [
   ["accueil", "/"],
   ["la carte", "/menu"],
+  ["traiteur", "/traiteur"],
+  ["livraison", "/livraison"],
+  ["avis", "/avis"],
   ["contact", "/contact"],
 ];
 
@@ -57,6 +62,8 @@ function Header({
   cartCount: number;
 }) {
   const pathname = usePathname();
+  const { user } = useAuth();
+  const accountHref = user ? (user.role === "admin" ? "/admin" : "/dashboard") : "/auth/login";
   const here = (p: string) => (p === "/" ? pathname === "/" : pathname.startsWith(p));
   return (
     <>
@@ -86,7 +93,7 @@ function Header({
         </nav>
         <div className="header__actions">
           <LangSwitch />
-          <Link className="icon-btn" href="/auth/login" aria-label="Mon compte">
+          <Link className="icon-btn" href={accountHref} aria-label="Mon compte">
             <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="8" r="3.4" />
               <path d="M5 20c0-3.6 3.1-5.5 7-5.5s7 1.9 7 5.5" />
@@ -115,6 +122,7 @@ function Header({
 }
 
 function MobileMenu({ onClose }: { onClose: () => void }) {
+  const { user } = useAuth();
   return (
     <div className="mobile-menu">
       <div className="mobile-menu__top">
@@ -133,6 +141,17 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             {label}
           </Link>
         ))}
+        <Link href="/a-propos" onClick={onClose}>
+          qui sommes-nous
+        </Link>
+        <Link href={user ? "/dashboard" : "/auth/login"} onClick={onClose}>
+          espace client
+        </Link>
+        {user?.role === "admin" && (
+          <Link href="/admin" onClick={onClose}>
+            espace resto
+          </Link>
+        )}
       </nav>
       <Link href="/menu" className="btn btn--primary mobile-menu__cta" onClick={onClose}>
         commander
@@ -154,6 +173,7 @@ function CartBar({ onOpen, count, subtotal }: { onOpen: () => void; count: numbe
 function Footer() {
   return (
     <footer className="footer">
+      <BogolanBand height={20} />
       <div className="footer__main">
         <div className="footer__col footer__brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -168,12 +188,15 @@ function Footer() {
         <div className="footer__col">
           <h4>Commander</h4>
           <Link href="/menu">La carte</Link>
-          <Link href="/contact">Contact</Link>
+          <Link href="/traiteur">Traiteur</Link>
+          <Link href="/livraison">Livraison &amp; retrait</Link>
+          <Link href="/avis">Avis</Link>
         </div>
         <div className="footer__col">
           <h4>La maison</h4>
-          <Link href="/auth/login">Espace client</Link>
-          <Link href="/contact">Nous contacter</Link>
+          <Link href="/a-propos">Qui sommes-nous</Link>
+          <Link href="/contact">Contact</Link>
+          <Link href="/dashboard">Espace client</Link>
         </div>
         <div className="footer__col">
           <h4>Infos</h4>

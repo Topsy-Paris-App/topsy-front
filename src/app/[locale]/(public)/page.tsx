@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { getMenu } from "@/lib/api/menu";
 import DishCard from "@/components/topsy/DishCard";
@@ -7,7 +8,6 @@ import Stars from "@/components/topsy/Stars";
 export const dynamic = "force-dynamic";
 
 const RATING = 4.75;
-const REVIEW_COUNT = 320;
 
 const ARGS = [
   { k: "100 % Halal", v: "viandes certifiées" },
@@ -16,10 +16,10 @@ const ARGS = [
   { k: "Éco-responsable", v: "contenants biodégradables" },
 ];
 
+// Real verified testimonials (owner-confirmed).
 const REVIEWS = [
-  { name: "Aïcha M.", stars: 5, text: "Le ndolé est exactement comme chez ma grand-mère. Livré bien chaud, dressage magnifique." },
-  { name: "Jean-Marc T.", stars: 5, text: "Plateau XL pour 12 au bureau : impeccable, généreux, tout le monde a adoré." },
-  { name: "Fatou D.", stars: 5, text: "Yassa au top, portions généreuses et contenants vraiment bio. Je recommande." },
+  { name: "Yolande", stars: 4, text: "Votre particularité réside dans la présentation soignée de vos plats, votre sérieux et bien sûr le goût des plats." },
+  { name: "Oriane", stars: 4.5, text: "Testé et approuvé !" },
 ];
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -55,12 +55,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <strong>4,75</strong>
               <span className="ratingchip__body">
                 <Stars value={RATING} size={15} />
-                <span className="ratingchip__count">{REVIEW_COUNT}+ avis vérifiés</span>
+                <span className="ratingchip__count">/5 · avis vérifiés</span>
               </span>
             </div>
           </div>
           <div className="hero__photoframe">
-            <div style={{ width: "100%", height: "100%", borderRadius: 14, background: "#e6dac1" }} />
+            <Image
+              src="/images/hero.jpg"
+              alt="Plat camerounais Topsy"
+              fill
+              priority
+              sizes="(max-width: 980px) 100vw, 480px"
+              style={{ objectFit: "cover", borderRadius: 14 }}
+            />
             <span className="hero__sticker">
               cuisiné
               <br />
@@ -113,7 +120,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="traiteur-teaser">
           <div className="traiteur-teaser__art">
             <div className="traiteur__photoframe">
-              <div style={{ width: "100%", height: "100%", borderRadius: 14, background: "#e6dac1" }} />
+              <Image
+                src="/images/crevettes.jpg"
+                alt="Traiteur Topsy"
+                fill
+                sizes="(max-width: 980px) 100vw, 480px"
+                style={{ objectFit: "cover", borderRadius: 14 }}
+              />
             </div>
           </div>
           <div className="traiteur-teaser__body">
@@ -128,7 +141,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <li>Formules sur mesure pour 10–12 et plus</li>
               <li>Livraison &amp; mise en place en Île-de-France</li>
             </ul>
-            <Link className="btn btn--outline-light" href="/contact">
+            <Link className="btn btn--outline-light" href="/traiteur">
               découvrir le traiteur
             </Link>
           </div>
@@ -143,7 +156,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <div className="reviews__meta">
             <Stars value={RATING} size={22} />
-            <p>Note moyenne sur {REVIEW_COUNT}+ avis vérifiés</p>
+            <p>Note moyenne · avis vérifiés</p>
           </div>
         </div>
         <div className="reviews__grid">

@@ -1,32 +1,36 @@
-import { getTranslations } from "next-intl/server";
-import ContactForm from "@/components/contact/ContactForm";
+import PageHero from "@/components/topsy/PageHero";
+import Photo from "@/components/topsy/Photo";
+import TopsyContactForm from "@/components/contact/TopsyContactForm";
 
-export default async function ContactPage() {
-  const t = await getTranslations("contact");
+const INFO: [string, string][] = [
+  ["Adresse", "10–12 mail de l'Égalité, 93120 La Courneuve"],
+  ["Téléphone", "07 87 75 96 10"],
+  ["Email", "topsy.par@gmail.com"],
+  ["Horaires", "Mar–Sam 11h–21h · Dim 11h–14h"],
+];
 
-  const subjects = [
-    t("subjectOrder"),
-    t("subjectCatering"),
-    t("subjectOther"),
-  ];
-
+export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-background pt-24 pb-20">
-      <section className="max-w-2xl mx-auto px-6 lg:px-8">
-        <p className="text-xs uppercase tracking-[0.3em] text-primary font-bold mb-3">
-          {t("subtitle")}
-        </p>
-        <h1 className="text-4xl lg:text-6xl font-headline text-on-surface mb-6">
-          {t("title")}
-        </h1>
-        <p className="text-on-surface-variant text-lg leading-relaxed mb-10">
-          {t("intro")}
-        </p>
-
-        <div className="bg-surface-container-low p-8 rounded-xl">
-          <ContactForm subjects={subjects} />
+    <div>
+      <PageHero kicker="on vous répond vite" title="contact" />
+      <section className="section">
+        <div className="contact-grid">
+          <TopsyContactForm />
+          <aside className="contact-info">
+            <div className="contact-map">
+              <Photo imageUrl="/images/pastels.jpg" alt="Topsy · La Courneuve" radius={14} />
+            </div>
+            <ul className="contact-list">
+              {INFO.map(([k, v]) => (
+                <li key={k}>
+                  <span>{k}</span>
+                  <b>{v}</b>
+                </li>
+              ))}
+            </ul>
+          </aside>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

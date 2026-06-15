@@ -36,6 +36,22 @@ export interface CreateOrderPayload {
   items: { item_id: string; qty: number; options?: string[] }[];
 }
 
+// FR label + style key for each API OrderStatus. `key` matches the .ostatus--* CSS classes.
+export const ORDER_STATUS: Record<string, { label: string; key: string }> = {
+  pending_payment: { label: "en attente de paiement", key: "payée" },
+  paid: { label: "payée", key: "payée" },
+  accepted: { label: "acceptée", key: "payée" },
+  preparing: { label: "en préparation", key: "enpréparation" },
+  ready: { label: "prête", key: "prête" },
+  en_route: { label: "en route", key: "enroute" },
+  delivered: { label: "livrée", key: "livrée" },
+  completed: { label: "terminée", key: "livrée" },
+  cancelled: { label: "annulée", key: "enroute" },
+  refunded: { label: "remboursée", key: "enroute" },
+};
+
+export const ORDER_TIMELINE = ["paid", "preparing", "ready", "en_route", "delivered"];
+
 // ---------------------------------------------------------------------------
 // API functions
 // ---------------------------------------------------------------------------
