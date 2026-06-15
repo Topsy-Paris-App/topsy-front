@@ -33,10 +33,10 @@ export const mentionsLegales: LegalDoc = {
     ),
     h("Éditeur du site"),
     p(
-      "Le site topsy-paris.fr est édité par TOPSY PARIS, {{FORME_JURIDIQUE}} au capital de {{CAPITAL}} euros, dont le siège social est situé 12 mail de l'Égalité, 93120 La Courneuve.",
+      "Le site topsy-paris.fr est édité par TOPSY PARIS, SAS (Société par Actions Simplifiée) au capital de {{CAPITAL}} euros, dont le siège social est situé 66 avenue Henri Barbusse, 95470 Fosses.",
     ),
     p(
-      "SIRET : 91155023400015 — RCS {{VILLE_RCS}} {{NUMERO_RCS}} — N° TVA intracommunautaire : {{TVA_INTRACOM}}.",
+      "SIRET : 91155023400015 — RCS Pontoise 911 550 234 — N° TVA intracommunautaire : FR39911550234.",
     ),
     p(
       "Adresse de l'établissement (retrait / click & collect) : 10-12 mail de l'Égalité, 93120 La Courneuve.",
@@ -48,7 +48,7 @@ export const mentionsLegales: LegalDoc = {
       "Site (front) hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis — vercel.com.",
     ),
     p(
-      "Serveur applicatif et base de données (back) hébergés par Heroku / Salesforce, Inc., 415 Mission Street, San Francisco, CA 94105, États-Unis — heroku.com. Région d'hébergement des données : {{REGION_HEBERGEMENT}}.",
+      "Serveur applicatif et base de données (back) hébergés par Heroku / Salesforce, Inc., 415 Mission Street, San Francisco, CA 94105, États-Unis — heroku.com. Région d'hébergement des données : Union européenne et États-Unis (Vercel, Heroku), transferts encadrés par les clauses contractuelles types de la Commission européenne.",
     ),
     h("Propriété intellectuelle"),
     p(
@@ -75,7 +75,7 @@ export const cgv: LegalDoc = {
     ),
     h("Article 1 — Vendeur"),
     p(
-      "Les produits sont vendus par TOPSY PARIS, {{FORME_JURIDIQUE}}, SIRET 91155023400015, dont le siège est situé 12 mail de l'Égalité, 93120 La Courneuve, ci-après « le Vendeur ». Contact : topsy.par@gmail.com — 06 59 92 14 82.",
+      "Les produits sont vendus par TOPSY PARIS, SAS (Société par Actions Simplifiée), SIRET 91155023400015, dont le siège est situé 66 avenue Henri Barbusse, 95470 Fosses, ci-après « le Vendeur ». Contact : topsy.par@gmail.com — 06 59 92 14 82.",
     ),
     h("Article 2 — Produits"),
     p(
@@ -126,7 +126,7 @@ export const confidentialite: LegalDoc = {
     ),
     h("Responsable du traitement"),
     p(
-      "TOPSY PARIS, 12 mail de l'Égalité, 93120 La Courneuve. Contact pour toute question relative aux données : topsy.par@gmail.com.",
+      "TOPSY PARIS (SAS), 66 avenue Henri Barbusse, 95470 Fosses. Établissement : 12 mail de l'Égalité, 93120 La Courneuve. Contact pour toute question relative aux données : topsy.par@gmail.com.",
     ),
     h("Données collectées"),
     p(
@@ -146,7 +146,7 @@ export const confidentialite: LegalDoc = {
     ),
     h("Transferts hors UE"),
     p(
-      "Certains prestataires (Vercel, Heroku/Salesforce) peuvent être établis hors de l'Union européenne. Les transferts éventuels sont encadrés par les clauses contractuelles types de la Commission européenne. Région d'hébergement des données : {{REGION_HEBERGEMENT}}.",
+      "Certains prestataires (Vercel, Heroku/Salesforce) peuvent être établis hors de l'Union européenne. Les transferts éventuels sont encadrés par les clauses contractuelles types de la Commission européenne. Région d'hébergement des données : Union européenne et États-Unis (Vercel, Heroku), transferts encadrés par les clauses contractuelles types de la Commission européenne.",
     ),
     h("Vos droits"),
     p(
