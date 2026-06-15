@@ -60,7 +60,7 @@ export const mentionsLegales: LegalDoc = {
     ),
     h("Médiation de la consommation"),
     p(
-      "Conformément à l'article L612-1 du Code de la consommation, le consommateur peut recourir gratuitement au médiateur de la consommation : {{NOM_MEDIATEUR}} — {{ADRESSE_OU_SITE_MEDIATEUR}}.",
+      "Conformément à l'article L612-1 du Code de la consommation, le consommateur peut recourir gratuitement au médiateur de la consommation : CM2C (Centre de la médiation de la consommation de conciliateurs de justice) — 14 rue Saint-Jean, 75017 Paris — https://cm2c.net.",
     ),
   ],
 };
@@ -103,7 +103,7 @@ export const cgv: LegalDoc = {
     ),
     h("Article 8 — Réclamations et médiation"),
     p(
-      "Toute réclamation peut être adressée à topsy.par@gmail.com. En cas de litige non résolu, le consommateur peut saisir gratuitement le médiateur de la consommation : {{NOM_MEDIATEUR}} — {{ADRESSE_OU_SITE_MEDIATEUR}}. Plateforme européenne de règlement des litiges : ec.europa.eu/consumers/odr.",
+      "Toute réclamation peut être adressée à topsy.par@gmail.com. En cas de litige non résolu, le consommateur peut saisir gratuitement le médiateur de la consommation : CM2C (Centre de la médiation de la consommation de conciliateurs de justice) — 14 rue Saint-Jean, 75017 Paris — https://cm2c.net. Plateforme européenne de règlement des litiges : ec.europa.eu/consumers/odr.",
     ),
     h("Article 9 — Données personnelles"),
     p(
