@@ -1,13 +1,27 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export interface CartItem {
-  itemId: string;
+export interface CartOption {
+  id: string;
   name: string;
-  unitPriceCents: number;
+  price_cents: number;
+}
+
+export interface CartItem {
+  key: string;
+  itemId: string;
+  slug: string;
+  name: string;
+  basePriceCents: number;
+  options: CartOption[];
   qty: number;
+  unitPriceCents: number;
   imageUrl?: string | null;
-  options?: string[];
+}
+
+/** Stable key for an item + its selected options, so distinct configs are distinct lines. */
+export function lineKey(itemId: string, optionIds: string[]): string {
+  return [itemId, ...[...optionIds].sort()].join("|");
 }
 
 export type CreneauMode = "livraison" | "retrait";
@@ -23,8 +37,8 @@ interface CartState {
   items: CartItem[];
   creneau: Creneau;
   add: (item: CartItem) => void;
-  remove: (itemId: string) => void;
-  updateQty: (itemId: string, qty: number) => void;
+  remove: (key: string) => void;
+  updateQty: (key: string, qty: number) => void;
   clear: () => void;
   setCreneau: (creneau: Creneau) => void;
 }
@@ -36,27 +50,27 @@ export const useCart = create<CartState>()(
       creneau: { mode: "livraison", date: null, dateLabel: null, time: null },
       add: (item) =>
         set((state) => {
-          const existing = state.items.find((i) => i.itemId === item.itemId);
+          const existing = state.items.find((i) => i.key === item.key);
           if (existing) {
             return {
               items: state.items.map((i) =>
-                i.itemId === item.itemId ? { ...i, qty: i.qty + item.qty } : i,
+                i.key === item.key ? { ...i, qty: i.qty + item.qty } : i,
               ),
             };
           }
           return { items: [...state.items, item] };
         }),
-      remove: (itemId) =>
+      remove: (key) =>
         set((state) => ({
-          items: state.items.filter((i) => i.itemId !== itemId),
+          items: state.items.filter((i) => i.key !== key),
         })),
-      updateQty: (itemId, qty) =>
+      updateQty: (key, qty) =>
         set((state) => ({
           items:
             qty <= 0
-              ? state.items.filter((i) => i.itemId !== itemId)
+              ? state.items.filter((i) => i.key !== key)
               : state.items.map((i) =>
-                  i.itemId === itemId ? { ...i, qty } : i,
+                  i.key === key ? { ...i, qty } : i,
                 ),
         })),
       clear: () => set({ items: [] }),

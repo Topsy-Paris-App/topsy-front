@@ -76,7 +76,11 @@ export default function CheckoutPage() {
         customer_phone: f.tel,
         address: mode === "livraison" ? `${f.adresse}, ${f.cp} ${f.ville}` : undefined,
         note: f.note || undefined,
-        items: items.map((i) => ({ item_id: i.itemId, qty: i.qty, options: i.options })),
+        items: items.map((i) => ({
+          item_id: i.itemId,
+          qty: i.qty,
+          option_ids: i.options.map((o) => o.id),
+        })),
       });
       const checkout = await createCheckout(order.id);
       clear();
@@ -235,9 +239,14 @@ export default function CheckoutPage() {
           <h3>votre commande</h3>
           <ul className="recap">
             {items.map((it) => (
-              <li className="recap__line" key={it.itemId}>
+              <li className="recap__line" key={it.key}>
                 <span className="recap__q">{it.qty}×</span>
-                <span className="recap__n">{it.name}</span>
+                <span className="recap__n">
+                  {it.name}
+                  {it.options.length > 0 && (
+                    <em> · {it.options.map((o) => o.name).join(" · ")}</em>
+                  )}
+                </span>
                 <span className="recap__p">{formatCents(it.unitPriceCents * it.qty)}</span>
               </li>
             ))}

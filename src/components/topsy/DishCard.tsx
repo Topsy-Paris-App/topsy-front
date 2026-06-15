@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "@/i18n/navigation";
-import { useCart } from "@/lib/cart/store";
+import { useCart, lineKey } from "@/lib/cart/store";
 import { formatCents } from "@/lib/price";
 import { localize, type MenuItem } from "@/lib/api/menu";
 import Badge from "./Badge";
 import Photo from "./Photo";
+import Configurator from "./Configurator";
 
 interface Props {
   item: MenuItem;
@@ -24,20 +24,40 @@ function badgesOf(item: MenuItem): string[] {
 export default function DishCard({ item, locale }: Props) {
   const add = useCart((s) => s.add);
   const [added, setAdded] = useState(false);
+  const [configOpen, setConfigOpen] = useState(false);
   const name = localize(item, "name", locale);
   const description = localize(item, "description", locale);
-  const href = `/menu/${item.slug}`;
   const badges = badgesOf(item);
+  const hasOptions = item.option_groups.length > 0;
 
   function onAdd() {
-    add({ itemId: item.id, name, unitPriceCents: item.price_cents, qty: 1, imageUrl: item.image_url });
+    if (hasOptions) {
+      setConfigOpen(true);
+      return;
+    }
+    add({
+      key: lineKey(item.id, []),
+      itemId: item.id,
+      slug: item.slug,
+      name,
+      basePriceCents: item.price_cents,
+      options: [],
+      unitPriceCents: item.price_cents,
+      qty: 1,
+      imageUrl: item.image_url,
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 1100);
   }
 
   return (
     <article className="dish">
-      <Link href={href} className="dish__media" aria-label={`Voir ${name}`}>
+      <button
+        type="button"
+        className="dish__media"
+        onClick={() => (hasOptions ? setConfigOpen(true) : onAdd())}
+        aria-label={hasOptions ? `Composer ${name}` : `Ajouter ${name}`}
+      >
         <Photo imageUrl={item.image_url} alt={`photo · ${name}`} />
         {badges.length > 0 && (
           <div className="dish__badges">
@@ -46,11 +66,11 @@ export default function DishCard({ item, locale }: Props) {
             ))}
           </div>
         )}
-      </Link>
+      </button>
       <div className="dish__body">
-        <Link href={href} className="dish__name">
+        <button type="button" className="dish__name" onClick={() => (hasOptions ? setConfigOpen(true) : onAdd())}>
           {name}
-        </Link>
+        </button>
         <p className="dish__blurb">{description}</p>
         <div className="dish__foot">
           <span className="dish__price">{formatCents(item.price_cents)}</span>
@@ -59,7 +79,7 @@ export default function DishCard({ item, locale }: Props) {
             className={`add-btn${added ? " add-btn--on" : ""}`}
             onClick={onAdd}
             disabled={!item.is_available}
-            aria-label="Ajouter au panier"
+            aria-label={hasOptions ? "Composer" : "Ajouter au panier"}
           >
             {added ? (
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
@@ -73,6 +93,7 @@ export default function DishCard({ item, locale }: Props) {
           </button>
         </div>
       </div>
+      {configOpen && <Configurator item={item} locale={locale} onClose={() => setConfigOpen(false)} />}
     </article>
   );
 }

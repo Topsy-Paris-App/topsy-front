@@ -33,7 +33,7 @@ export interface CreateOrderPayload {
   customer_phone: string;
   address?: string;
   note?: string;
-  items: { item_id: string; qty: number; options?: string[] }[];
+  items: { item_id: string; qty: number; option_ids?: string[] }[];
 }
 
 // FR label + style key for each API OrderStatus. `key` matches the .ostatus--* CSS classes.

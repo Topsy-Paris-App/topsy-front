@@ -52,26 +52,26 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
             </div>
             <ul className="drawer__items">
               {items.map((it) => (
-                <li className="citem" key={it.itemId}>
+                <li className="citem" key={it.key}>
                   <div className="citem__thumb" style={{ position: "relative" }}>
                     <Photo imageUrl={it.imageUrl} alt="" radius={10} />
                   </div>
                   <div className="citem__info">
                     <span className="citem__name">{it.name}</span>
-                    {it.options && it.options.length > 0 && (
-                      <span className="citem__opt">{it.options.join(" · ")}</span>
+                    {it.options.length > 0 && (
+                      <span className="citem__opt">{it.options.map((o) => o.name).join(" · ")}</span>
                     )}
                     <span className="citem__price">{formatCents(it.unitPriceCents * it.qty)}</span>
-                    <button className="citem__remove" onClick={() => remove(it.itemId)}>
+                    <button className="citem__remove" onClick={() => remove(it.key)}>
                       retirer
                     </button>
                   </div>
                   <div className="qty">
-                    <button onClick={() => updateQty(it.itemId, it.qty - 1)} aria-label="moins">
+                    <button onClick={() => updateQty(it.key, it.qty - 1)} aria-label="moins">
                       –
                     </button>
                     <span>{it.qty}</span>
-                    <button onClick={() => updateQty(it.itemId, it.qty + 1)} aria-label="plus">
+                    <button onClick={() => updateQty(it.key, it.qty + 1)} aria-label="plus">
                       +
                     </button>
                   </div>
