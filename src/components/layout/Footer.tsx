@@ -19,7 +19,7 @@ export default function Footer() {
               href="/"
               className="font-headline text-2xl tracking-[0.2em] text-primary text-glow font-light block mb-4"
             >
-              ZIGGLA
+              TOPSY
             </Link>
             <p className="text-on-surface-variant text-sm font-body leading-relaxed max-w-xs">
               {t("tagline")}
@@ -65,10 +65,10 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/properties"
+                    href="/menu"
                     className="text-on-surface-variant text-sm hover:text-on-surface transition-colors duration-200"
                   >
-                    {navT("properties")}
+                    {navT("menu")}
                   </Link>
                 </li>
                 <li>
@@ -88,7 +88,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/privacy"
+                    href="/confidentialite"
                     className="text-on-surface-variant text-sm hover:text-on-surface transition-colors duration-200"
                   >
                     {t("privacy")}
@@ -96,7 +96,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/terms"
+                    href="/mentions-legales"
                     className="text-on-surface-variant text-sm hover:text-on-surface transition-colors duration-200"
                   >
                     {t("terms")}
@@ -154,7 +154,7 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <span className="text-primary text-xs">✦</span>
             <span className="text-on-surface-variant/60 text-xs font-label tracking-wider">
-              800 Fulham Road, London SW6 5SL
+              10-12 mail de l&apos;Égalité, La Courneuve 93120
             </span>
           </div>
         </div>

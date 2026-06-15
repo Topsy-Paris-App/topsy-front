@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { apiFetch } from "@/lib/api/client";
+import { submitInquiry } from "@/lib/api/contact";
 
 interface Props {
   subjects: string[];
@@ -29,14 +29,12 @@ export default function ContactForm({ subjects }: Props) {
     }
     setSubmitting(true);
     try {
-      await apiFetch("/contact", {
-        method: "POST",
-        body: JSON.stringify({
-          full_name: fullName,
-          email,
-          subject: subject || undefined,
-          message,
-        }),
+      await submitInquiry({
+        kind: "contact",
+        full_name: fullName,
+        email,
+        subject: subject || undefined,
+        message,
       });
       setSuccess(true);
       setFullName("");

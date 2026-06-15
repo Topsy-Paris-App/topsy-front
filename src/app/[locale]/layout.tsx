@@ -8,9 +8,9 @@ import CookieBanner from "@/components/CookieBanner";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "ZIGGLA | Curated Living London",
+  title: "Topsy Paris | Traiteur africain & camerounais",
   description:
-    "Two unique luxury apartments in the heart of Putney, London. Experience London. Live in Style.",
+    "Plats africains et camerounais faits maison, à commander et récupérer à La Courneuve.",
 };
 
 export function generateStaticParams() {

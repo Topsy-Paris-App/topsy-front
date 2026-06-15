@@ -43,7 +43,7 @@ export default function CookieBanner() {
             <p className="text-xs text-on-surface-variant leading-relaxed">
               We use essential cookies to keep you signed in and improve your experience.
               By clicking "Accept", you agree to our{" "}
-              <Link href="/privacy" className="text-primary hover:underline">
+              <Link href="/confidentialite" className="text-primary hover:underline">
                 Privacy Policy
               </Link>
               . This site is GDPR compliant.

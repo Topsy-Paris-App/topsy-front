@@ -17,10 +17,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "mjduzgj5bbgoqbn6.public.blob.vercel-storage.com",
-      },
+      // Topsy blob storage hostname to be added once provisioned.
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",

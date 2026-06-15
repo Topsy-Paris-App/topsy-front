@@ -35,7 +35,8 @@ export default function Navbar() {
         : "/dashboard/user";
 
   const navLinks = [
-    { href: "/properties", label: t("properties") },
+    { href: "/menu", label: t("menu") },
+    { href: "/panier", label: t("cart") },
     { href: "/contact", label: t("contact") },
   ];
 
@@ -52,7 +53,7 @@ export default function Navbar() {
             href="/"
             className="font-headline text-xl lg:text-2xl tracking-[0.2em] text-primary text-glow font-light"
           >
-            ZIGGLA
+            TOPSY
           </Link>
 
           {/* Desktop nav */}
@@ -103,7 +104,7 @@ export default function Navbar() {
             )}
 
             <Link
-              href="/#booking"
+              href="/menu"
               className="hidden sm:inline-flex items-center justify-center gold-gradient text-on-primary text-xs font-label font-semibold tracking-widest uppercase px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity duration-200"
             >
               {t("bookNow")}
@@ -193,7 +194,7 @@ export default function Navbar() {
           )}
 
           <Link
-            href="/#booking"
+            href="/menu"
             onClick={() => setIsMobileOpen(false)}
             className="mt-3 inline-flex items-center justify-center gold-gradient text-on-primary text-xs font-label font-semibold tracking-widest uppercase px-5 py-3 rounded-full hover:opacity-90 transition-opacity"
           >
