@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { useCart, lineKey, type CartOption } from "@/lib/cart/store";
 import { formatCents } from "@/lib/price";
 import { localize, type MenuItem, type OptionGroup } from "@/lib/api/menu";
@@ -82,7 +83,9 @@ export default function Configurator({
     setTimeout(onClose, 450);
   }
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal modal--config" onClick={(e) => e.stopPropagation()}>
         <div className="config__media">
@@ -158,6 +161,7 @@ export default function Configurator({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

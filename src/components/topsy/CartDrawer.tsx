@@ -58,8 +58,8 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
                   </div>
                   <div className="citem__info">
                     <span className="citem__name">{it.name}</span>
-                    {it.options.length > 0 && (
-                      <span className="citem__opt">{it.options.map((o) => o.name).join(" · ")}</span>
+                    {(it.options ?? []).length > 0 && (
+                      <span className="citem__opt">{(it.options ?? []).map((o) => o.name).join(" · ")}</span>
                     )}
                     <span className="citem__price">{formatCents(it.unitPriceCents * it.qty)}</span>
                     <button className="citem__remove" onClick={() => remove(it.key)}>

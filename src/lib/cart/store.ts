@@ -76,7 +76,7 @@ export const useCart = create<CartState>()(
       clear: () => set({ items: [] }),
       setCreneau: (creneau) => set({ creneau }),
     }),
-    { name: "topsy_cart" },
+    { name: "topsy_cart_v2", version: 1 },
   ),
 );
 
