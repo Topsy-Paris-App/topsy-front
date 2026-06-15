@@ -173,7 +173,7 @@ export const cookies: LegalDoc = {
     ),
     h("Cookies de mesure d'audience et autres"),
     p(
-      "Soumis à votre consentement : statistiques de fréquentation et amélioration du service ({{OUTILS_MESURE_AUDIENCE}}). Ils ne sont déposés qu'après acceptation via le bandeau cookies.",
+      "Soumis à votre consentement : statistiques de fréquentation et amélioration du service (le cas échéant, ex. Google Analytics — aucun outil de ce type n'est actif à ce jour). Ils ne sont déposés qu'après acceptation via le bandeau cookies.",
     ),
     h("Gérer vos cookies"),
     p(
